@@ -1,0 +1,112 @@
+import { defineGuide } from "@/lib/content/define-guide"
+
+export const guide = defineGuide({
+  slug: "multiplayer-guide",
+  title: "Waterpark Simulator Multiplayer Guide",
+  description: "Check the official four-player limit, hosting scope, recent host controls, and the current crossplay evidence gap.",
+  quickAnswer: "Waterpark Simulator supports online sessions for up to four people: one host and up to three other players. The official 1.0 announcement says the host can start a new park or load an existing one, and proximity voice chat is optional. The official sources checked for this page do not state crossplay, so do not assume PC, PS5, and Xbox players can share a lobby.",
+  checkedAt: "2026-08-11",
+  scope: "Steam/PC version 1.0 through update 1.0.48, the US PS5 listing, and the US Xbox Series X|S listing snapshot.",
+  status: "source-checked-with-unknowns",
+  sections: [
+    { id: "player-limits", title: "Official player limits" },
+    { id: "hosting-and-joining", title: "Hosting and joining" },
+    { id: "host-controls", title: "Host controls by update" },
+    { id: "crossplay", title: "Crossplay status" },
+    { id: "unknowns", title: "What remains unknown" },
+    { id: "sources", title: "Sources" },
+    { id: "update-triggers", title: "When this page changes" },
+  ],
+  unknowns: [
+    "Whether PC, PS5, and Xbox can join the same lobby. No crossplay statement was found on the official site or checked store listings.",
+    "Whether Steam patch numbers and multiplayer settings reached PS5 and Xbox at the same time.",
+    "The exact current join-menu flow on every platform. The checked official release note confirms joining, but it is not a platform-by-platform UI manual.",
+    "Cross-save or cross-progression between platforms.",
+  ],
+  sources: [
+    {
+      title: "Waterpark Simulator 1.0 is out now!",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839676055888453",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Official Steam/PC 1.0 announcement",
+      boundary: "Confirms host plus up to three others, new or existing parks, and optional proximity voice chat. It does not prove crossplay or console patch parity.",
+    },
+    {
+      title: "Update 1.0.30 patch notes",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839676055898488",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Steam/PC updates 1.0.21–1.0.30",
+      boundary: "Confirms host permission changes, the joining-player hammer change, and the first-time settings explanation for the PC update stream.",
+    },
+    {
+      title: "Update 1.0.43 patch notes and thanks",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314343176",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Steam/PC update 1.0.43",
+      boundary: "Confirms lobby-only bans and additional multiplayer host settings. It does not establish console rollout timing.",
+    },
+    {
+      title: "Update 1.0.48 patch notes",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314345774",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Steam/PC update 1.0.48",
+      boundary: "Confirms multiplayer safeguards and shared pool movement changes; it does not claim every lobby issue is fixed.",
+    },
+    {
+      title: "Waterpark Simulator on PlayStation Store US",
+      url: "https://store.playstation.com/en-us/concept/10017040",
+      identity: "platform",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "US PS5 listing",
+      boundary: "Lists one local player, up to four online players, and optional online play. It does not state crossplay, cross-save, or PS4 support.",
+    },
+    {
+      title: "Waterpark Simulator on Xbox US",
+      url: "https://www.xbox.com/en-US/games/store/Waterpark-Simulator/9N055WD1VC99",
+      identity: "platform",
+      retrievedAt: "2026-08-09",
+      versionPlatformScope: "US Xbox Series X|S listing snapshot",
+      boundary: "The Aug 9 snapshot listed online co-op and multiplayer for 2–4 players. The Aug 11 text fetch returned locked media and did not re-expose those fields, so this is not presented as a fresh Aug 11 retrieval.",
+    },
+  ],
+  updateTrigger: [
+    "An official player-limit, lobby, crossplay, or cross-save statement changes.",
+    "A Steam update changes host permissions, joining behavior, or multiplayer safeguards.",
+    "The PlayStation or Xbox listing changes its player-count or online-play metadata.",
+    "Xbox listing metadata becomes readable again and can be rechecked against the Aug 9 snapshot.",
+  ],
+})
+
+<h2 id="player-limits">Official player limits by platform</h2>
+
+The strongest current sources agree on a maximum session size of four. This corrects a six-player claim found in a third-party guide during the third-course audit; the official release announcement and console listings take priority.
+
+| Platform | What the checked source confirms | Evidence date and limit |
+| --- | --- | --- |
+| PC / Steam | One host can play with up to three other people. | Official 1.0 announcement, checked Aug 11, 2026. |
+| PS5 | One local player and up to four online players; online play is optional. | PlayStation US listing, checked Aug 11, 2026. |
+| Xbox Series X\|S | Online co-op and multiplayer for 2–4 players in the saved listing snapshot. | Xbox US snapshot from Aug 9, 2026; the Aug 11 text fetch did not re-expose the metadata. |
+
+These rows describe the correct CayPlay game entity and the wording visible in the named sources. They do not prove that all three platforms can connect to one another.
+
+<h2 id="hosting-and-joining">What is verified about hosting and joining</h2>
+
+The official 1.0 announcement says a host can run a park from the beginning or load an existing park, then play with up to three friends or strangers. Optional proximity voice chat was included with the multiplayer launch.
+
+The checked official material confirms that joining exists, but it does not provide a current button-by-button guide for every platform. This page therefore does not invent menu names, password-room steps, firewall fixes, or administrator-mode advice. If the current menu differs from older videos or third-party guides, follow the in-game multiplayer prompts.
+
+<h2 id="host-controls">Host controls added after launch</h2>
+
+- **Update 1.0.30:** improved the host permission system for building, destroying, hiring staff, and opening the park. Joining players start with a hammer rather than a sledgehammer, and first-time multiplayer users receive an explanation of the ticket-booth settings.
+- **Update 1.0.43:** added lobby-only player bans and more host settings, including painting and Caymart purchasing options.
+- **Update 1.0.48:** added safeguards against bad actors spoofing Steam IDs and let all players move pools that contain blobs.
+
+Those notes come from the Steam/PC update stream. They should not be read as proof that the same numbered build reached both console platforms at the same time.
+
+<h2 id="crossplay">Is Waterpark Simulator crossplay?</h2>
+
+**Crossplay is not verified by the official sources used for this page.** The official site, Steam page, PlayStation listing, and saved Xbox listing do not provide a crossplay statement. Until CayPlay or a platform page publishes a clear answer, plan multiplayer sessions within the same platform instead of assuming a mixed PC-and-console lobby will work.

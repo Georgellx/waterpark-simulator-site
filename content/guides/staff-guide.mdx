@@ -1,0 +1,114 @@
+import { defineGuide } from "@/lib/content/define-guide"
+
+export const guide = defineGuide({
+  slug: "staff-guide",
+  title: "Waterpark Simulator Staff Guide",
+  description: "Use the verified hiring route, understand staff capacity, and check the Security and staff-quitting changes added after version 1.0.",
+  quickAnswer: "Focused UI videos show staff recruitment under Hire on the in-game tablet and current employees under Manage. Capacity upgrades are observed through hiring research at the Research Table, while Staff Overflow is the over-cap route with an extra cost. Version 1.0 added Security and Mascot staff; updates 1.0.43 and 1.0.48 changed when staff can quit and how that behavior can be disabled.",
+  checkedAt: "2026-08-11",
+  scope: "Official Steam/PC version 1.0–1.0.48 changes, plus dated third-party UI observations for hiring and capacity.",
+  status: "source-checked-with-unknowns",
+  sections: [
+    { id: "hire-and-manage", title: "Hire and manage staff" },
+    { id: "capacity", title: "Capacity and Staff Overflow" },
+    { id: "security", title: "Security and Saboteurs" },
+    { id: "staff-quitting", title: "Staff quitting by version" },
+    { id: "unknowns", title: "What remains unknown" },
+    { id: "sources", title: "Sources" },
+    { id: "update-triggers", title: "When this page changes" },
+  ],
+  unknowns: [
+    "Exact current hiring prices, overflow charges, salary values, and a complete capacity-level table.",
+    "A complete current role-unlock table and platform-by-platform UI comparison.",
+    "Security success rates, ideal guard counts, patrol range, and every bad-visitor identification cue.",
+    "Whether each Steam/PC staff behavior change is already identical on PS5 and Xbox.",
+  ],
+  sources: [
+    {
+      title: "Waterpark Simulator on Steam",
+      url: "https://store.steampowered.com/app/3293260/Waterpark_Simulator/",
+      identity: "platform",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Current Steam store listing for app 3293260",
+      boundary: "Confirms the CayPlay entity, staff management, online co-op, Security, and Mascots. It is not a complete staff manual.",
+    },
+    {
+      title: "Waterpark Simulator 1.0 is out now!",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839676055888453",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Official Steam/PC 1.0 announcement",
+      boundary: "Confirms Security removes bad visitors and Mascots raise visitor happiness. It does not provide efficiency numbers or optimal staffing.",
+    },
+    {
+      title: "Update 1.0.43 patch notes and thanks",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314343176",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Steam/PC update 1.0.43",
+      boundary: "Confirms quitting behavior, its notification treatment, and the Saboteur trait. It is not a complete bad-visitor field guide.",
+    },
+    {
+      title: "Update 1.0.48 patch notes",
+      url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840310314345774",
+      identity: "official",
+      retrievedAt: "2026-08-11",
+      versionPlatformScope: "Steam/PC update 1.0.48",
+      boundary: "Confirms that staff do not quit on Easy or Sandbox and that an accessibility option can disable staff quitting and NPC retaliation.",
+    },
+    {
+      title: "Quick Tips: How to Hire Staff",
+      url: "https://www.youtube.com/watch?v=KoxBsrB6648",
+      identity: "third-party",
+      retrievedAt: "2026-08-09",
+      versionPlatformScope: "Observed 2025 PC user interface",
+      boundary: "Supports the Hire and Manage UI observation only. It is not an official manual and may not match current console UI.",
+    },
+    {
+      title: "Mathias Does Tech: Hire More Staff",
+      url: "https://www.youtube.com/watch?v=6LcXcEFuRN8",
+      identity: "third-party",
+      retrievedAt: "2026-08-09",
+      versionPlatformScope: "Observed 2025 PC research and staff-cap flow",
+      boundary: "Cross-checks the capacity path. Exact costs and a complete current level table are deliberately excluded.",
+    },
+    {
+      title: "Quick Tips: Increase Staff Capacity",
+      url: "https://www.youtube.com/watch?v=-IwczPFpGkw",
+      identity: "third-party",
+      retrievedAt: "2026-08-09",
+      versionPlatformScope: "Observed 2025 PC capacity UI",
+      boundary: "Supports the Research Table and Staff Overflow observation, not permanent prices or efficiency claims.",
+    },
+  ],
+  updateTrigger: [
+    "A patch changes the Hire, Manage, Research Table, capacity, or Staff Overflow interface.",
+    "CayPlay adds, removes, or changes a staff role, Security behavior, or bad-visitor trait.",
+    "A patch changes staff quitting, difficulty behavior, or the accessibility setting.",
+    "A reliable current source publishes exact costs or a complete staff-cap table that can be independently checked.",
+  ],
+})
+
+<h2 id="hire-and-manage">How to hire and review staff</h2>
+
+The focused UI material accepted in the third course shows two separate tablet areas: **Hire** for recruiting staff and **Manage** for reviewing employees already working in the park. This is a dated UI observation rather than an official manual, so labels may move after an interface update or differ on consoles.
+
+Use the Hire section when you still have capacity. If the game says the cap has been reached, the next question is capacity research or Staff Overflow—not a hidden second hiring menu.
+
+<h2 id="capacity">How staff capacity and Staff Overflow fit together</h2>
+
+Two independent UI videos place hiring-level upgrades at the **Research Table**. A separate Staff Overflow route allows hiring above the normal cap with an additional cost.
+
+This page intentionally does not publish a level-by-level cost table or an overflow percentage. The checked material did not provide a current official table, and older economy values can become wrong after balance patches. The durable answer is the route: research for normal capacity, or use Staff Overflow only after reading the current in-game cost.
+
+<h2 id="security">Security is now a staff role</h2>
+
+Older guides may say staff cannot deal with bad visitors. That answer became outdated with version 1.0, which added **Security** as a staff type that removes bad visitors. The same release added **Mascots**, described as increasing visitor happiness.
+
+Update 1.0.43 added the **Saboteur** trait. The official patch note describes Saboteurs as arriving with a sledgehammer and unplugging a pool if they are not stopped. That is a verified version change, but it is not enough to invent a complete visual-identification guide, Security success rate, or ideal guard count.
+
+<h2 id="staff-quitting">Why staff quit after version 1.0.43</h2>
+
+Update 1.0.43 introduced quitting after a player bullies a staff member heavily within a short period. A quitting employee sends a notification, receives a red exclamation mark by their name, and is highlighted red.
+
+Update 1.0.48 narrowed that behavior: staff do not quit on **Easy** or **Sandbox**, and an accessibility option can disable staff quitting and NPC retaliation. These details come from the Steam/PC patch stream; console parity remains unconfirmed in the sources checked for this page.
