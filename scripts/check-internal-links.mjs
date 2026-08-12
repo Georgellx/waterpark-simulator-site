@@ -7,6 +7,7 @@ const expectedRoutes = new Set([
   "/multiplayer-guide",
   "/staff-guide",
   "/console-platforms-guide",
+  "/privacy",
 ]);
 
 const files = [
@@ -16,6 +17,7 @@ const files = [
   "app/staff-guide/page.tsx",
   "app/console-platforms-guide/page.tsx",
   "app/not-found.tsx",
+  "app/privacy/page.tsx",
   "components/navigation.tsx",
   "components/site-footer.tsx",
   "components/home-hero.tsx",

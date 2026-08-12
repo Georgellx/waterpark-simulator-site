@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Bree_Serif, Manrope } from "next/font/google";
+import { AnalyticsConsent } from "@/components/analytics-consent";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { getSiteUrl, isIndexingEnabled } from "@/lib/site-config";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -15,9 +17,8 @@ const breeSerif = Bree_Serif({
   variable: "--font-bree-serif",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const indexingEnabled =
-  process.env.NEXT_PUBLIC_INDEXING_ENABLED === "true";
+const siteUrl = getSiteUrl();
+const indexingEnabled = isIndexingEnabled();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | Waterpark Simulator Guide",
   },
   description:
-    "An independent Waterpark Simulator guide preview for multiplayer, staff, and console platforms.",
+    "Independent, source-checked Waterpark Simulator guides for multiplayer, staff, and console platforms.",
   robots: {
     index: indexingEnabled,
     follow: indexingEnabled,
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main-content">{children}</main>
           <SiteFooter />
         </div>
+        <AnalyticsConsent measurementId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
     </html>
   );

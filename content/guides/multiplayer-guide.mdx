@@ -4,9 +4,9 @@ export const guide = defineGuide({
   slug: "multiplayer-guide",
   title: "Waterpark Simulator Multiplayer Guide",
   description: "Check the official four-player limit, hosting scope, recent host controls, and the current crossplay evidence gap.",
-  quickAnswer: "Waterpark Simulator supports online sessions for up to four people: one host and up to three other players. The official 1.0 announcement says the host can start a new park or load an existing one, and proximity voice chat is optional. The official sources checked for this page do not state crossplay, so do not assume PC, PS5, and Xbox players can share a lobby.",
-  checkedAt: "2026-08-11",
-  scope: "Steam/PC version 1.0 through update 1.0.48, the US PS5 listing, and the US Xbox Series X|S listing snapshot.",
+  quickAnswer: "Waterpark Simulator supports online sessions for up to four people: one host and up to three other players. The official 1.0 announcement says the host can start a new park or load an existing one, and proximity voice chat is optional. Steam/PC update 1.0.50 added another friends-only lobby safeguard and put the lobby-only ban button on the tablet. The official sources checked for this page do not state crossplay, so do not assume PC, PS5, and Xbox players can share a lobby.",
+  checkedAt: "2026-08-12",
+  scope: "Steam/PC version 1.0 through update 1.0.50, plus the current US PS5 and Xbox Series X|S listings.",
   status: "source-checked-with-unknowns",
   sections: [
     { id: "player-limits", title: "Official player limits" },
@@ -57,10 +57,18 @@ export const guide = defineGuide({
       boundary: "Confirms multiplayer safeguards and shared pool movement changes; it does not claim every lobby issue is fixed.",
     },
     {
+      title: "Update 1.0.50 patch notes",
+      url: "https://store.steampowered.com/news/app/3293260/view/703275952293021057",
+      identity: "official",
+      retrievedAt: "2026-08-12",
+      versionPlatformScope: "Steam/PC update 1.0.50",
+      boundary: "Confirms a friends-only lobby spoofing safeguard and a tablet ban button whose effect is limited to that lobby. It does not establish console rollout timing or claim every multiplayer exploit is fixed.",
+    },
+    {
       title: "Waterpark Simulator on PlayStation Store US",
       url: "https://store.playstation.com/en-us/concept/10017040",
       identity: "platform",
-      retrievedAt: "2026-08-11",
+      retrievedAt: "2026-08-12",
       versionPlatformScope: "US PS5 listing",
       boundary: "Lists one local player, up to four online players, and optional online play. It does not state crossplay, cross-save, or PS4 support.",
     },
@@ -68,16 +76,15 @@ export const guide = defineGuide({
       title: "Waterpark Simulator on Xbox US",
       url: "https://www.xbox.com/en-US/games/store/Waterpark-Simulator/9N055WD1VC99",
       identity: "platform",
-      retrievedAt: "2026-08-09",
-      versionPlatformScope: "US Xbox Series X|S listing snapshot",
-      boundary: "The Aug 9 snapshot listed online co-op and multiplayer for 2–4 players. The Aug 11 text fetch returned locked media and did not re-expose those fields, so this is not presented as a fresh Aug 11 retrieval.",
+      retrievedAt: "2026-08-12",
+      versionPlatformScope: "Current US Xbox Series X|S listing",
+      boundary: "Lists single player plus online co-op and multiplayer for 2–4 players. It does not state crossplay, cross-save, or Xbox One support.",
     },
   ],
   updateTrigger: [
     "An official player-limit, lobby, crossplay, or cross-save statement changes.",
     "A Steam update changes host permissions, joining behavior, or multiplayer safeguards.",
     "The PlayStation or Xbox listing changes its player-count or online-play metadata.",
-    "Xbox listing metadata becomes readable again and can be rechecked against the Aug 9 snapshot.",
   ],
 })
 
@@ -87,9 +94,9 @@ The strongest current sources agree on a maximum session size of four. This corr
 
 | Platform | What the checked source confirms | Evidence date and limit |
 | --- | --- | --- |
-| PC / Steam | One host can play with up to three other people. | Official 1.0 announcement, checked Aug 11, 2026. |
-| PS5 | One local player and up to four online players; online play is optional. | PlayStation US listing, checked Aug 11, 2026. |
-| Xbox Series X\|S | Online co-op and multiplayer for 2–4 players in the saved listing snapshot. | Xbox US snapshot from Aug 9, 2026; the Aug 11 text fetch did not re-expose the metadata. |
+| PC / Steam | One host can play with up to three other people. | Official 1.0 announcement, rechecked Aug 12, 2026. |
+| PS5 | One local player and up to four online players; online play is optional. | PlayStation US listing, checked Aug 12, 2026. |
+| Xbox Series X\|S | Single player plus online co-op and multiplayer for 2–4 players. | Xbox US listing, checked Aug 12, 2026. |
 
 These rows describe the correct CayPlay game entity and the wording visible in the named sources. They do not prove that all three platforms can connect to one another.
 
@@ -104,9 +111,10 @@ The checked official material confirms that joining exists, but it does not prov
 - **Update 1.0.30:** improved the host permission system for building, destroying, hiring staff, and opening the park. Joining players start with a hammer rather than a sledgehammer, and first-time multiplayer users receive an explanation of the ticket-booth settings.
 - **Update 1.0.43:** added lobby-only player bans and more host settings, including painting and Caymart purchasing options.
 - **Update 1.0.48:** added safeguards against bad actors spoofing Steam IDs and let all players move pools that contain blobs.
+- **Update 1.0.50:** added another safeguard intended to stop people spoofing as friends’ hosts in friends-only lobbies. It also made the ban button available on the tablet; the patch note says the ban applies to that lobby, not generally.
 
 Those notes come from the Steam/PC update stream. They should not be read as proof that the same numbered build reached both console platforms at the same time.
 
 <h2 id="crossplay">Is Waterpark Simulator crossplay?</h2>
 
-**Crossplay is not verified by the official sources used for this page.** The official site, Steam page, PlayStation listing, and saved Xbox listing do not provide a crossplay statement. Until CayPlay or a platform page publishes a clear answer, plan multiplayer sessions within the same platform instead of assuming a mixed PC-and-console lobby will work.
+**Crossplay is not verified by the official sources used for this page.** The official site, Steam page, PlayStation listing, and Xbox listing do not provide a crossplay statement. Until CayPlay or a platform page publishes a clear answer, plan multiplayer sessions within the same platform instead of assuming a mixed PC-and-console lobby will work.

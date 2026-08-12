@@ -1,13 +1,13 @@
-# Waterpark Simulator 三页私有 MVP 技术规格
+# Waterpark Simulator 三页真实实验技术规格
 
-- 冻结日期：2026-08-11
+- 更新日期：2026-08-12
 - 对应产品规格：[PRODUCT.md](PRODUCT.md)
 - 对应视觉规范：[DESIGN.md](DESIGN.md)
-- 状态：第 4 步已通过；第 5 步已实现，等待用户验收
+- 状态：关卡 5 第 5 步已于 2026-08-12 验收通过；第 6 步获批发布到 GitHub `main`
 
 ## Context
 
-当前工作区有第三课事实材料、第四课审计、参考站截图、三套视觉方案和原创 favicon。第 4 步已经在独立子目录 `waterpark-simulator-site/` 创建本地网站，且没有初始化 Git，从而避免把研究原文、爬虫材料和课程档案带进未来代码仓库。
+当前工作区有第三课事实材料、第四课审计、关卡 5 记录、参考站截图、三套视觉方案和原创 favicon。站点子目录 `waterpark-simulator-site/` 已是独立公开 Git 仓库；域名已购买并托管在 Cloudflare，GA4 资源已创建，但本步骤只修改本地文件，不推送、不部署、不修改 DNS。
 
 技术范围已锁定为 Next.js App Router、TypeScript、Tailwind 和 MDX。具体依赖版本在第 4 步创建项目时根据官方兼容信息记录；本规格不猜测未来版本号。
 
@@ -17,9 +17,9 @@
 
 - 仅创建 `waterpark-simulator-site/`，不改造成整个研究工作区的 Git 仓库。
 - 默认使用 Server Components。
-- 只有手机菜单确实需要开关状态时使用一个小型 Client Component。
-- 不添加数据库、CMS、API 路由、账号、表单、分析 SDK 或无必要的状态管理库。
-- 不连接 GitHub、Vercel、Cloudflare 或任何正式域名。
+- 只有手机菜单与分析同意确实需要浏览器状态时使用小型 Client Components。
+- 不添加数据库、CMS、API 路由、账号、表单、额外分析 SDK 或无必要的状态管理库；GA 使用 Next.js 自带的 `next/script` 条件加载。
+- 本步骤不推送 GitHub、不创建 Vercel Project、不修改 Cloudflare DNS、不连接 GSC，也不开启索引。
 
 ### 2. 计划目录
 
@@ -35,13 +35,16 @@ waterpark-simulator-site/
 │  ├─ multiplayer-guide/page.tsx
 │  ├─ staff-guide/page.tsx
 │  ├─ console-platforms-guide/page.tsx
+│  ├─ privacy/page.tsx
 │  ├─ not-found.tsx
 │  ├─ robots.ts
+│  ├─ sitemap.ts
 │  └─ globals.css
 ├─ components/
 │  ├─ site-header.tsx
 │  ├─ mobile-nav.tsx
 │  ├─ site-footer.tsx
+│  ├─ analytics-consent.tsx
 │  ├─ home-hero.tsx
 │  ├─ guide-card.tsx
 │  ├─ guide-article.tsx
@@ -54,6 +57,8 @@ waterpark-simulator-site/
 ├─ lib/content/
 │  ├─ types.ts
 │  └─ define-guide.ts
+├─ lib/analytics-consent.ts
+├─ lib/site-config.ts
 ├─ public/
 │  ├─ brand/
 │  └─ images/
@@ -65,7 +70,7 @@ waterpark-simulator-site/
 
 实际脚手架生成的必需配置文件可以保留，但不得借机添加计划外页面或服务。
 
-`PRODUCT.md`、`TECH.md` 和 `DESIGN.md` 已移入网站子目录，课程记录中的链接也已同步更新。三份规格只保留一份权威副本，确保未来 GitHub 私有仓库包含实现依据，又不会把原始研究档案一起推送。
+`PRODUCT.md`、`TECH.md` 和 `DESIGN.md` 只在网站子目录保留一份权威副本。公开代码仓库包含实现依据，但不包含原始研究档案、课程附件、私人 Gmail、付款信息、令牌或真实 GA Measurement ID。
 
 ### 3. 内容接口
 
@@ -122,6 +127,9 @@ export interface GuidePage {
 - `GuideCard`：首页和 Guides 共用，通过内容数据控制标题、说明、日期和链接。
 - `GuideArticle`：统一直接答案、核验状态、MDX 正文、未知项、来源和更新触发区。
 - `SourceList`：按 `SourceCitation` 字段展示来源身份和边界，不生成“可信度分数”。
+- `AnalyticsConsent`：读取本地选择，只在 `accepted` 且存在 `NEXT_PUBLIC_GA_ID` 时通过 `next/script` 加载 Google tag，并在路由变化时发送页面浏览。
+- `AnalyticsSettingsButton`：页尾的小型 Client Component，只负责重新打开分析设置。
+- `privacy/page.tsx`：静态隐私说明，始终 `noindex, follow`，只在页尾链接。
 - `not-found.tsx`：只链接首页和 Guides。
 
 ### 6. 视觉和资产
@@ -138,18 +146,29 @@ export interface GuidePage {
 环境变量：
 
 ```dotenv
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=https://www.waterparksimulatorguide.com
 NEXT_PUBLIC_INDEXING_ENABLED=false
+NEXT_PUBLIC_GA_ID=
 ```
 
-- 缺少 `NEXT_PUBLIC_SITE_URL` 时本地回退为 `http://localhost:3000`；正式域名购买后再配置。
+- 缺少 `NEXT_PUBLIC_SITE_URL` 时回退为正式主域 `https://www.waterparksimulatorguide.com`，避免构建产物出现 localhost canonical。
 - 只有 `NEXT_PUBLIC_INDEXING_ENABLED` 严格等于 `true` 时才允许索引。
 - 默认 metadata 输出 `noindex, nofollow`。
-- `robots.ts` 在禁止索引时对所有爬虫返回 `Disallow: /`。
+- `robots.ts` 始终返回 `Allow: /` 并声明正式 sitemap；禁止索引由 HTML robots metadata 控制，使爬虫能读取 noindex。
+- `sitemap.ts` 只输出首页、Guides 和三篇攻略；Privacy 不进入 sitemap。
+- Privacy 始终输出 `noindex, follow`。
 - 每页独立设置 title、description 和规范路径；`keywords` 可以保留为课程兼容字段，但不作为排名或验收指标。
-- 公开部署前必须单独验收并显式改变索引开关，不能因环境变量缺失自动开放。
+- 只有正式域名最终 QA 通过并获得第 10 步验收语后，才在第 11 步显式改变索引开关。
 
-### 8. 内容数据流
+### 8. 分析同意和隐私
+
+- 状态只有 `accepted | declined | unset`，保存键为 `waterpark_analytics_consent_v1`，不进入服务端或数据库。
+- `unset` 显示 Accept/Decline；`declined` 不渲染 Google Script；`accepted` 才加载 `googletagmanager.com`。
+- 从已接受改为拒绝时刷新当前页，停止已加载标签在该页继续发送事件。
+- 页尾可重新打开设置；Privacy 页面说明选择、可选分析和公开联系邮箱。
+- `NEXT_PUBLIC_GA_ID` 是构建时公开变量，但真实值只进入后续 Vercel 环境，不写入仓库。
+
+### 9. 内容数据流
 
 ```text
 第三课已验收材料
@@ -162,15 +181,16 @@ NEXT_PUBLIC_INDEXING_ENABLED=false
 
 参考站截图和三套视觉图只影响布局，不进入事实数据流。
 
-### 9. 无障碍与响应式实现
+### 10. 无障碍与响应式实现
 
 - 使用语义 `header`、`nav`、`main`、`article`、`footer` 和正确标题层级。
 - 提供跳至主内容链接、明显焦点样式、菜单 `aria-expanded`/`aria-controls` 和关闭逻辑。
 - 手机验收宽度为 `390×844`，并额外检查中间宽度；整页不得横向滚动。
 - 宽表格放入可访问的局部滚动容器，不能撑破页面。
 - 动效仅使用轻量 CSS，并尊重 `prefers-reduced-motion`。
+- 分析设置使用原生 modal dialog，支持 Escape、键盘焦点约束和明确按钮文本。
 
-### 10. 失败处理
+### 11. 失败处理
 
 - 静态内容不存在或元数据不完整时让开发或生产构建失败，不在页面显示 `TODO`、`Lorem ipsum` 或空来源框。
 - 未批准路由统一进入 404，不创建薄占位页。
@@ -183,16 +203,17 @@ NEXT_PUBLIC_INDEXING_ENABLED=false
 
 1. `npm run lint`：代码和 MDX 集成无 lint 错误。
 2. `npm run typecheck`：`tsc --noEmit` 通过，三份 `GuidePage` 数据符合接口。
-3. `npm run build`：生产构建通过，五条路由均生成。
-4. `npm run check:links`：检查五条站内路由和文档中的站内链接，不把外网瞬时可访问性伪装成构建结果。
+3. `npm run build`：索引关闭和开启两种生产构建都通过，六条页面路由、robots 和 sitemap 均生成。
+4. `npm run check:links`：检查六条站内路由和文档中的站内链接，不把外网瞬时可访问性伪装成构建结果。
 5. 文本扫描：旧游戏名、`Switch` 支持、虚构兑换码、占位符和未批准路由均为零。
 
 ### 浏览器检查
 
 - 使用用户已选的 Chrome 打开本地站点。
-- 桌面和 `390×844` 手机视口逐条访问五条路由。
+- 桌面、`390×844` 手机和中间宽度逐条访问六条路由与一个不存在的路径。
 - 点击桌面导航、手机菜单、三张卡片、返回链接和 404 入口。
-- 检查控制台错误、横向溢出、键盘焦点、标题层级、颜色对比和图片跳动。
+- 检查控制台错误、横向溢出、键盘焦点、标题层级、颜色对比、图片跳动和同意界面。
+- 检查同意前零 GA 请求、接受后加载、拒绝后不加载、刷新后记忆选择，以及页尾重新设置。
 - 将首页截图与第 1 套效果图按相同视口对照；只修正视觉偏差，不复制草图中的事实错误。
 
 ### PRODUCT.md 对应关系
@@ -204,7 +225,7 @@ NEXT_PUBLIC_INDEXING_ENABLED=false
 | 8–16：直接答案、来源、未知项 | `GuidePage` 校验、MDX 内容审查、逐页验收 |
 | 17–18：外链与独立声明 | 链接属性和页尾检查 |
 | 19–21：手机、键盘、404 | Chrome 手动验收 |
-| 22：metadata 与禁止索引 | 页面头部和 `robots.txt` 检查 |
+| 22、25–27：metadata、Privacy、同意和 sitemap | 页面头部、网络、localStorage、`robots.txt` 与 `sitemap.xml` 检查 |
 | 23–24：静态体验与视觉纠错 | 构建、占位符扫描、同尺寸视觉对照 |
 
 ## Risks and mitigations
@@ -215,7 +236,8 @@ NEXT_PUBLIC_INDEXING_ENABLED=false
 | MDX 元数据与正文不一致 | 单一 `guide` 导出 + 构建校验 + 第 5 步逐页事实审查 |
 | 首页图片造成慢加载或 CLS | 本地优化图片、固定尺寸、正确 `sizes`，首屏只保留一张主要视觉 |
 | 手机菜单引入不必要客户端代码 | 仅菜单组件使用最小状态，其余保持 Server Components |
-| 私有预览意外收录 | metadata 与 robots 双重禁止；只有显式 `true` 才开放 |
+| QA 期间意外收录 | HTML metadata 默认 noindex；robots 允许读取 noindex；只有显式 `true` 才开放 |
+| 同意前误发 GA | Script 只在 `accepted` 分支渲染；浏览器网络请求与刷新持久化检查 |
 | 参考站资产误入仓库 | 所有站点资产从本项目原创目录复制，代码仓库不包含参考站截图 |
 
 ## 实施顺序
@@ -224,4 +246,4 @@ NEXT_PUBLIC_INDEXING_ENABLED=false
 2. 第 4 步只创建脚手架、共享组件和五条空路由，验收布局与响应式。
 3. 第 5 步再写入三篇 MDX 正文和最终事实。
 4. 第 6 步完成技术与视觉 QA。
-5. 只有用户之后明确授权，才执行 GitHub 推送；部署和域名仍不在本轮范围。
+5. 第 5 步验收后，只有用户明确说“第5步通过，允许推送 GitHub main”，才进入 GitHub 推送；Vercel、DNS、GSC 与索引继续各自等待后续验收门。

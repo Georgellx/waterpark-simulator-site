@@ -1,13 +1,13 @@
-# Waterpark Simulator 三页私有 MVP 产品规格
+# Waterpark Simulator 三页真实实验产品规格
 
-- 冻结日期：2026-08-11
+- 更新日期：2026-08-12
 - 内容语言：US English
 - 设计稿：无 Figma；使用 [已选择的第 1 套效果图](docs/design/selected-homepage-direction.png)
-- 状态：第 4 步已通过；第 5 步已实现，等待用户验收
+- 状态：关卡 5 第 5 步已于 2026-08-12 验收通过；第 6 步获批发布到 GitHub `main`
 
 ## Summary
 
-制作一个仅英文、默认禁止搜索引擎收录的 Waterpark Simulator 私有攻略 MVP。网站帮助玩家快速进入 Multiplayer、Staff 和 Console Platforms 三篇有来源、有核验日期、会明确标记未知项的攻略。
+制作一个仅英文、在最终生产 QA 前默认禁止搜索引擎收录的 Waterpark Simulator 三页真实实验站。网站帮助玩家快速进入 Multiplayer、Staff 和 Console Platforms 三篇有来源、有核验日期、会明确标记未知项的攻略，并在访客同意后才加载 Google Analytics。
 
 ## Goals
 
@@ -21,17 +21,19 @@
 - 不建立完整 Wiki、搜索、账号、评论、数据库、CMS 或后台。
 - 不建立多语言页面或多语言骨架。
 - 不建立 Security、console issues、codes、tier list、beginner guide 或其他未批准页面。
-- 不购买域名，不公开部署，不连接 Vercel、Cloudflare、Search Console 或分析服务。
+- 本步骤不推送 GitHub、不部署 Vercel、不修改正式网站 DNS、不连接 Search Console，也不开启索引。
+- 不连接 Google Ads，不加入广告 SDK、账号、表单或额外分析包。
 - 本 MVP 不代表原定 5 个有效内页建设门通过。
 
 ## Behavior
 
-1. 网站只有以下五条公开路由：
+1. 网站只有以下五条内容路由和一条页尾隐私路由：
    - `/`
    - `/guides`
    - `/multiplayer-guide`
    - `/staff-guide`
    - `/console-platforms-guide`
+   - `/privacy`
 
 2. 所有用户可见的网站内容使用 US English。游戏名保持官方英文 `Waterpark Simulator`，不显示语言切换器，也不生成 locale 路由。
 
@@ -69,7 +71,7 @@
 
 12. Console Platforms 页使用 Steam、PlayStation 和 Xbox 官方页面说明 PC、PS5、Xbox Series X|S 的当前 listing。PS4、Xbox One、Switch、Mac 等没有在已核验官方入口中列出的平台，只能写成截至核验日期“未列出”或“未知”，不能写成永久不会推出。
 
-13. 三篇文章只使用第三课已验收材料。参考站只能帮助确定页面结构，不能作为关键游戏事实的唯一来源。
+13. 三篇文章使用第三课已验收材料，并在上线前补充当前官方来源复核。参考站只能帮助确定页面结构，不能作为关键游戏事实的唯一来源。
 
 14. 没有可靠证据时，页面显示未知边界，不用猜测补齐。不得出现虚构兑换码、玩家数、价格、性能结论、成功率、员工效率或其他无来源数字。
 
@@ -87,8 +89,14 @@
 
 21. 不存在的路径显示定制 404，提供返回首页和 Guides 的清楚入口，不把用户送到未经批准的页面。
 
-22. 五条公开路由都使用独立、准确的 title 和 description。私有 MVP 的所有页面默认 `noindex, nofollow`，只有未来获得公开发布授权后才允许改变。
+22. 六条公开路由都使用独立、准确的 title 和 description。`NEXT_PUBLIC_INDEXING_ENABLED=false` 时，全站内容默认 `noindex, nofollow`；Privacy 始终是 `noindex, follow`。只有最终生产 QA 通过并获得单独授权后才允许内容页索引。
 
-23. 页面是静态内容体验，不依赖登录、表单或远程数据请求。正常访问时不显示加载骨架；缺少关键内容或来源时不得用占位符假装完成。
+23. 攻略页面是静态内容体验，不依赖登录、表单或远程内容请求。唯一可选的第三方请求是访客同意后加载的 Google Analytics；正常访问时不显示加载骨架，缺少关键内容或来源时不得用占位符假装完成。
 
 24. 正式网站遵循 [DESIGN.md](DESIGN.md)。效果图中的临时棕榈树 Logo、`Switch` 标牌、临时文案和平台图标不是批准内容，必须替换或删除。
+
+25. `/privacy` 只在页尾链接，不加入主导航，也不计入三篇 SEO 攻略。它说明可选分析、浏览器本地保存的选择、基础托管日志和公开隐私邮箱。
+
+26. 首次访问显示 Accept 和 Decline。选择保存为 `waterpark_analytics_consent_v1`；同意前或拒绝后不得加载 Google Analytics 请求，页尾的 Analytics settings 可重新打开选择界面。
+
+27. `sitemap.xml` 只列首页、Guides 和三篇攻略，不列 Privacy；`robots.txt` 始终允许抓取并声明 sitemap，使爬虫能读取页面上的 noindex。

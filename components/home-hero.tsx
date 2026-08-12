@@ -27,7 +27,7 @@ export function HomeHero() {
           </div>
           <p className="hero-trust">
             <BadgeCheck aria-hidden="true" size={18} />
-            Fan-made · Sources reviewed Aug 11, 2026 · Unknowns stay marked
+            Fan-made · Sources reviewed Aug 12, 2026 · Unknowns stay marked
           </p>
         </div>
 

@@ -1,13 +1,15 @@
 import type { MetadataRoute } from "next";
-
-const indexingEnabled =
-  process.env.NEXT_PUBLIC_INDEXING_ENABLED === "true";
+import { getSiteUrl } from "@/lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
+  const siteUrl = getSiteUrl();
+
   return {
     rules: {
       userAgent: "*",
-      ...(indexingEnabled ? { allow: "/" } : { disallow: "/" }),
+      allow: "/",
     },
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }

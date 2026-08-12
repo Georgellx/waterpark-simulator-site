@@ -27,7 +27,7 @@ export default function GuidesPage() {
         <div className="page-container">
           <p className="hub-note">
             <BadgeCheck aria-hidden="true" size={18} /> Sources reviewed Aug
-            11, 2026. Unknowns remain visible instead of being guessed.
+            12, 2026. Unknowns remain visible instead of being guessed.
           </p>
           <GuideGrid />
         </div>

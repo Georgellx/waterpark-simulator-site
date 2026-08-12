@@ -55,7 +55,7 @@ export default function HomePage() {
                 limits of each source.
               </p>
             </div>
-            <span className="trust-status">Sources reviewed Aug 11, 2026</span>
+            <span className="trust-status">Sources reviewed Aug 12, 2026</span>
           </div>
         </div>
       </section>

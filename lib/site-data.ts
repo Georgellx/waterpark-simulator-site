@@ -3,7 +3,8 @@ export type SiteRoute =
   | "/guides"
   | "/multiplayer-guide"
   | "/staff-guide"
-  | "/console-platforms-guide";
+  | "/console-platforms-guide"
+  | "/privacy";
 
 export type GuideKey = "multiplayer" | "staff" | "platforms";
 
@@ -17,7 +18,7 @@ export interface GuidePreview {
   eyebrow: string;
   title: string;
   description: string;
-  href: Exclude<SiteRoute, "/" | "/guides">;
+  href: Exclude<SiteRoute, "/" | "/guides" | "/privacy">;
   image: string;
   imageAlt: string;
 }

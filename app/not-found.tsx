@@ -11,8 +11,8 @@ export default function NotFound() {
           </div>
           <h1>This path is not part of the park</h1>
           <p>
-            The private MVP only includes the homepage, Guides, Multiplayer,
-            Staff, and Console Platforms.
+            This page does not exist. Return to the homepage or choose one of
+            the source-checked guides.
           </p>
           <div className="not-found-actions">
             <Link className="primary-button" href="/">

@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { AnalyticsSettingsButton } from "@/components/analytics-consent";
 import { Brand } from "@/components/brand";
 import { navigationItems } from "@/lib/site-data";
 
@@ -22,6 +23,8 @@ export function SiteFooter() {
               {item.label}
             </Link>
           ))}
+          <Link href="/privacy">Privacy</Link>
+          <AnalyticsSettingsButton />
         </nav>
         <nav className="footer-official" aria-label="Official game links">
           <a href="https://waterparksimulator.com/" rel="noreferrer" target="_blank">
@@ -36,8 +39,8 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="page-container footer-bottom">
-        <span>Private MVP · Indexing disabled</span>
-        <span>US English · Sources reviewed Aug 11, 2026</span>
+        <span>Fan-made · Not affiliated with CayPlay</span>
+        <span>US English · Sources reviewed Aug 12, 2026</span>
       </div>
     </footer>
   );

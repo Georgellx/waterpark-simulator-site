@@ -1,6 +1,6 @@
 # Waterpark Simulator Guide
 
-An independent, source-checked guide site for Waterpark Simulator. The current MVP covers multiplayer, staff, and console platforms in US English.
+An independent, source-checked guide site for Waterpark Simulator. The current three-guide experiment covers multiplayer, staff, and console platforms in US English.
 
 This project is fan-made and is not affiliated with or endorsed by CayPlay.
 
@@ -11,6 +11,7 @@ This project is fan-made and is not affiliated with or endorsed by CayPlay.
 - `/multiplayer-guide`
 - `/staff-guide`
 - `/console-platforms-guide`
+- `/privacy` (footer-only and excluded from the sitemap)
 
 ## Stack
 
@@ -42,11 +43,12 @@ npm run build
 Copy `.env.example` to `.env.local` when local overrides are needed.
 
 ```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=https://www.waterparksimulatorguide.com
 NEXT_PUBLIC_INDEXING_ENABLED=false
+NEXT_PUBLIC_GA_ID=
 ```
 
-Indexing stays disabled until a future public website launch is explicitly approved. Publishing this source repository does not deploy the website.
+Use the production `www` URL for release builds. Indexing stays disabled until final production QA is approved. `NEXT_PUBLIC_GA_ID` is configured in the deployment environment; the real value is not committed. Google Analytics loads only after visitor consent.
 
 ## Content policy
 

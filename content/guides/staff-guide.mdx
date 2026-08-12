@@ -4,9 +4,9 @@ export const guide = defineGuide({
   slug: "staff-guide",
   title: "Waterpark Simulator Staff Guide",
   description: "Use the verified hiring route, understand staff capacity, and check the Security and staff-quitting changes added after version 1.0.",
-  quickAnswer: "Focused UI videos show staff recruitment under Hire on the in-game tablet and current employees under Manage. Capacity upgrades are observed through hiring research at the Research Table, while Staff Overflow is the over-cap route with an extra cost. Version 1.0 added Security and Mascot staff; updates 1.0.43 and 1.0.48 changed when staff can quit and how that behavior can be disabled.",
-  checkedAt: "2026-08-11",
-  scope: "Official Steam/PC version 1.0–1.0.48 changes, plus dated third-party UI observations for hiring and capacity.",
+  quickAnswer: "Focused UI videos show staff recruitment under Hire on the in-game tablet and current employees under Manage. Capacity upgrades are observed through hiring research at the Research Table, while Staff Overflow is the over-cap route with an extra cost. Version 1.0 added Security and Mascot staff; updates 1.0.43 and 1.0.48 changed when staff can quit and how that behavior can be disabled. Update 1.0.50 reduced the chance of a Saboteur appearing, but the official note does not publish the new percentage.",
+  checkedAt: "2026-08-12",
+  scope: "Official Steam/PC version 1.0–1.0.50 changes, plus dated third-party UI observations for hiring and capacity.",
   status: "source-checked-with-unknowns",
   sections: [
     { id: "hire-and-manage", title: "Hire and manage staff" },
@@ -20,7 +20,7 @@ export const guide = defineGuide({
   unknowns: [
     "Exact current hiring prices, overflow charges, salary values, and a complete capacity-level table.",
     "A complete current role-unlock table and platform-by-platform UI comparison.",
-    "Security success rates, ideal guard counts, patrol range, and every bad-visitor identification cue.",
+    "The exact current Saboteur appearance chance, Security success rates, ideal guard counts, patrol range, and every bad-visitor identification cue.",
     "Whether each Steam/PC staff behavior change is already identical on PS5 and Xbox.",
   ],
   sources: [
@@ -28,7 +28,7 @@ export const guide = defineGuide({
       title: "Waterpark Simulator on Steam",
       url: "https://store.steampowered.com/app/3293260/Waterpark_Simulator/",
       identity: "platform",
-      retrievedAt: "2026-08-11",
+      retrievedAt: "2026-08-12",
       versionPlatformScope: "Current Steam store listing for app 3293260",
       boundary: "Confirms the CayPlay entity, staff management, online co-op, Security, and Mascots. It is not a complete staff manual.",
     },
@@ -55,6 +55,14 @@ export const guide = defineGuide({
       retrievedAt: "2026-08-11",
       versionPlatformScope: "Steam/PC update 1.0.48",
       boundary: "Confirms that staff do not quit on Easy or Sandbox and that an accessibility option can disable staff quitting and NPC retaliation.",
+    },
+    {
+      title: "Update 1.0.50 patch notes",
+      url: "https://store.steampowered.com/news/app/3293260/view/703275952293021057",
+      identity: "official",
+      retrievedAt: "2026-08-12",
+      versionPlatformScope: "Steam/PC update 1.0.50",
+      boundary: "Confirms that the chance of a Saboteur appearing was reduced. It does not publish the old or new percentage, Security success rates, or console rollout timing.",
     },
     {
       title: "Quick Tips: How to Hire Staff",
@@ -106,6 +114,8 @@ This page intentionally does not publish a level-by-level cost table or an overf
 Older guides may say staff cannot deal with bad visitors. That answer became outdated with version 1.0, which added **Security** as a staff type that removes bad visitors. The same release added **Mascots**, described as increasing visitor happiness.
 
 Update 1.0.43 added the **Saboteur** trait. The official patch note describes Saboteurs as arriving with a sledgehammer and unplugging a pool if they are not stopped. That is a verified version change, but it is not enough to invent a complete visual-identification guide, Security success rate, or ideal guard count.
+
+Update 1.0.50 reduced the percentage chance of a Saboteur appearing. The official note does not state the new percentage, so this guide keeps that number unknown instead of estimating it.
 
 <h2 id="staff-quitting">Why staff quit after version 1.0.43</h2>
 

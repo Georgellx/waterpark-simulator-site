@@ -4,9 +4,9 @@ export const guide = defineGuide({
   slug: "console-platforms-guide",
   title: "Waterpark Simulator Platforms Guide",
   description: "Compare the official PC, PS5, and Xbox Series X|S listings without turning unlisted platforms into permanent no-release claims.",
-  quickAnswer: "The current official Waterpark Simulator listings used for this guide are PC on Steam, PS5, and Xbox Series X|S. PlayStation lists one local player and up to four online players. The saved Xbox listing snapshot lists online co-op and multiplayer for 2–4 players. No official PS4, Xbox One, Nintendo Switch, or Mac listing was found in the checked sources; that means not listed as of this review, not never coming.",
-  checkedAt: "2026-08-11",
-  scope: "CayPlay's Steam app 3293260, the US PS5 listing, and the US Xbox Series X|S listing snapshot.",
+  quickAnswer: "The current official Waterpark Simulator listings used for this guide are Windows PC on Steam, PS5, and Xbox Series X|S. PlayStation lists one local player and up to four online players. Xbox lists single player plus online co-op and multiplayer for 2–4 players. No official PS4, Xbox One, Nintendo Switch, or Mac listing was found in the checked sources; that means not listed as of this review, not never coming.",
+  checkedAt: "2026-08-12",
+  scope: "CayPlay's current Steam app 3293260, US PS5 listing, and US Xbox Series X|S listing.",
   status: "source-checked-with-unknowns",
   sections: [
     { id: "official-platforms", title: "Official platform matrix" },
@@ -20,7 +20,6 @@ export const guide = defineGuide({
   unknowns: [
     "Future release plans for PS4, Xbox One, Nintendo Switch, or Mac.",
     "Crossplay, cross-save, and cross-progression between PC, PS5, and Xbox.",
-    "Whether the Xbox 2–4 player metadata has changed since the Aug 9 snapshot; the Aug 11 text fetch returned locked media only.",
     "A platform-wide performance target such as 4K or 60 FPS. No checked official technical source supports a universal claim.",
   ],
   sources: [
@@ -28,7 +27,7 @@ export const guide = defineGuide({
       title: "Waterpark Simulator on Steam",
       url: "https://store.steampowered.com/app/3293260/Waterpark_Simulator/",
       identity: "platform",
-      retrievedAt: "2026-08-11",
+      retrievedAt: "2026-08-12",
       versionPlatformScope: "PC / Windows Steam app 3293260",
       boundary: "Confirms the CayPlay entity, Windows requirements, release date, and online co-op. It does not list Mac support or crossplay.",
     },
@@ -36,7 +35,7 @@ export const guide = defineGuide({
       title: "Waterpark Simulator 1.0 is out now!",
       url: "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839676055888453",
       identity: "official",
-      retrievedAt: "2026-08-11",
+      retrievedAt: "2026-08-12",
       versionPlatformScope: "Official Steam/PC 1.0 announcement",
       boundary: "Confirms host plus up to three other players. It does not establish crossplay or console patch versions.",
     },
@@ -52,9 +51,9 @@ export const guide = defineGuide({
       title: "Waterpark Simulator on Xbox US",
       url: "https://www.xbox.com/en-US/games/store/Waterpark-Simulator/9N055WD1VC99",
       identity: "platform",
-      retrievedAt: "2026-08-09",
-      versionPlatformScope: "US Xbox Series X|S listing snapshot",
-      boundary: "The Aug 9 snapshot identifies Series X|S and 2–4 online co-op/multiplayer. The Aug 11 text fetch did not re-expose those fields, and the page does not prove Xbox One support.",
+      retrievedAt: "2026-08-12",
+      versionPlatformScope: "Current US Xbox Series X|S listing",
+      boundary: "Identifies Series X|S, single player, and 2–4 player online co-op and multiplayer. It does not prove Xbox One support, crossplay, or cross-save.",
     },
     {
       title: "Official Waterpark Simulator website",
@@ -69,7 +68,6 @@ export const guide = defineGuide({
     "A new official store listing appears for PS4, Xbox One, Nintendo Switch, Mac, or another platform.",
     "Steam, PlayStation, or Xbox changes platform or online-player metadata.",
     "CayPlay publishes an official crossplay, cross-save, or cross-progression statement.",
-    "Xbox listing metadata becomes readable again and can be compared with the Aug 9 snapshot.",
   ],
 })
 
@@ -81,7 +79,7 @@ Match both the game name and the CayPlay listing before treating a result as thi
 | --- | --- | --- |
 | PC | Steam app `3293260`, developed and published by CayPlay | Windows PC listing with online co-op; the official 1.0 announcement supports one host plus three others. |
 | PS5 | PlayStation US concept `10017040`, published by CayPlay Studios, LLC | PS5 listing; one local player; up to four online players; online play optional. |
-| Xbox Series X\|S | Xbox US product `9N055WD1VC99` | The Aug 9 saved snapshot lists single player plus 2–4 online co-op and multiplayer. |
+| Xbox Series X\|S | Xbox US product `9N055WD1VC99` | Current listing says single player plus 2–4 player online co-op and multiplayer. |
 
 Prices are not included because they vary by country, promotion, subscription, and date.
 
@@ -93,9 +91,9 @@ The safe reading is simple: buy only from a current official listing that names 
 
 <h2 id="online-play">Online player counts and platform wording</h2>
 
-The official Steam launch announcement and the PlayStation listing support a maximum of four online players. The saved Xbox listing uses a 2–4 range for online co-op and multiplayer. PlayStation also says online play is optional, meaning the game has a one-player experience; “one local player” does not mean local split-screen co-op.
+The official Steam launch announcement and the PlayStation listing support a maximum of four online players. The current Xbox listing uses a 2–4 range for online co-op and multiplayer. PlayStation also says online play is optional, meaning the game has a one-player experience; “one local player” does not mean local split-screen co-op.
 
-The Xbox metadata was readable and saved on Aug 9. On Aug 11, the page itself remained reachable, but the text reader returned locked media instead of the player-count fields. This page preserves the dated snapshot and says exactly where the fresh-read gap is.
+These figures were rechecked on Aug 12, 2026. They describe each store listing, not mixed-platform compatibility.
 
 <h2 id="crossplay">Crossplay and cross-save remain unverified</h2>
 
