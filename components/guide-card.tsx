@@ -19,10 +19,16 @@ const guideIcons: Record<GuideKey, typeof UsersRound> = {
 interface GuideCardProps {
   guide: GuidePreview;
   content: Pick<GuidePage, "checkedAt" | "status">;
+  headingLevel?: 2 | 3;
 }
 
-export function GuideCard({ guide, content }: GuideCardProps) {
+export function GuideCard({
+  guide,
+  content,
+  headingLevel = 3,
+}: GuideCardProps) {
   const Icon = guideIcons[guide.key];
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   const checkedAt = new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
@@ -46,7 +52,7 @@ export function GuideCard({ guide, content }: GuideCardProps) {
       </div>
       <div className="card-body">
         <p className="card-kicker">{guide.eyebrow}</p>
-        <h3>{guide.title}</h3>
+        <Heading>{guide.title}</Heading>
         <p>{guide.description}</p>
         <p className="card-date">
           <CalendarDays aria-hidden="true" size={15} /> Checked {checkedAt} ·{" "}

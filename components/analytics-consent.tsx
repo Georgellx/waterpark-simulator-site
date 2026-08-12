@@ -2,7 +2,13 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  type KeyboardEvent as ReactKeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   analyticsConsentStorageKey,
   type AnalyticsConsentState,
@@ -10,6 +16,10 @@ import {
 
 const consentChangeEvent = "waterpark:analytics-consent-change";
 const settingsOpenEvent = "waterpark:open-analytics-settings";
+
+interface AnalyticsSettingsOpenDetail {
+  trigger?: HTMLElement;
+}
 
 declare global {
   interface Window {
@@ -68,14 +78,34 @@ export function AnalyticsConsent({ measurementId }: AnalyticsConsentProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [analyticsReady, setAnalyticsReady] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const settingsTriggerRef = useRef<HTMLElement | null>(null);
+  const shouldRestoreSettingsFocusRef = useRef(false);
   const consent =
     sessionConsent === "unset" ? storedConsent : sessionConsent;
 
   useEffect(() => {
-    const openSettings = () => setSettingsOpen(true);
+    const openSettings = (event: Event) => {
+      const detail = (event as CustomEvent<AnalyticsSettingsOpenDetail>).detail;
+      settingsTriggerRef.current =
+        detail?.trigger ??
+        (document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null);
+      shouldRestoreSettingsFocusRef.current = true;
+      setSettingsOpen(true);
+    };
     window.addEventListener(settingsOpenEvent, openSettings);
     return () => window.removeEventListener(settingsOpenEvent, openSettings);
   }, []);
+
+  useEffect(() => {
+    if (settingsOpen || !shouldRestoreSettingsFocusRef.current) {
+      return;
+    }
+
+    shouldRestoreSettingsFocusRef.current = false;
+    settingsTriggerRef.current?.focus();
+  }, [settingsOpen]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -138,6 +168,32 @@ export function AnalyticsConsent({ measurementId }: AnalyticsConsentProps) {
     setAnalyticsReady(true);
   };
 
+  const keepDialogFocusInside = (
+    event: ReactKeyboardEvent<HTMLDialogElement>,
+  ) => {
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const buttons = dialogRef.current?.querySelectorAll<HTMLButtonElement>(
+      "button:not([disabled])",
+    );
+    const firstButton = buttons?.item(0);
+    const lastButton = buttons?.item((buttons?.length ?? 1) - 1);
+
+    if (!firstButton || !lastButton) {
+      return;
+    }
+
+    if (event.shiftKey && document.activeElement === firstButton) {
+      event.preventDefault();
+      lastButton.focus();
+    } else if (!event.shiftKey && document.activeElement === lastButton) {
+      event.preventDefault();
+      firstButton.focus();
+    }
+  };
+
   return (
     <>
       {consent === "accepted" && measurementId ? (
@@ -187,6 +243,7 @@ export function AnalyticsConsent({ measurementId }: AnalyticsConsentProps) {
           ref={dialogRef}
           aria-labelledby="analytics-settings-title"
           onCancel={() => setSettingsOpen(false)}
+          onKeyDown={keepDialogFocusInside}
         >
           <section>
             <p className="eyebrow">Privacy control</p>
@@ -233,7 +290,13 @@ export function AnalyticsSettingsButton() {
     <button
       className="footer-settings-button"
       type="button"
-      onClick={() => window.dispatchEvent(new Event(settingsOpenEvent))}
+      onClick={(event) =>
+        window.dispatchEvent(
+          new CustomEvent<AnalyticsSettingsOpenDetail>(settingsOpenEvent, {
+            detail: { trigger: event.currentTarget },
+          }),
+        )
+      }
     >
       Analytics settings
     </button>

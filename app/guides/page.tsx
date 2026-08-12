@@ -29,7 +29,7 @@ export default function GuidesPage() {
             <BadgeCheck aria-hidden="true" size={18} /> Sources reviewed Aug
             12, 2026. Unknowns remain visible instead of being guessed.
           </p>
-          <GuideGrid />
+          <GuideGrid headingLevel={2} />
         </div>
       </section>
     </>

@@ -11,13 +11,18 @@ const contentByKey: Record<(typeof guidePreviews)[number]["key"], GuidePage> = {
   platforms: consolePlatformsGuide,
 };
 
-export function GuideGrid() {
+interface GuideGridProps {
+  headingLevel?: 2 | 3;
+}
+
+export function GuideGrid({ headingLevel = 3 }: GuideGridProps) {
   return (
     <div className="guide-grid">
       {guidePreviews.map((guide) => (
         <GuideCard
           content={contentByKey[guide.key]}
           guide={guide}
+          headingLevel={headingLevel}
           key={guide.href}
         />
       ))}
