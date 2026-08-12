@@ -13,7 +13,7 @@ const settingsOpenEvent = "waterpark:open-analytics-settings";
 
 declare global {
   interface Window {
-    dataLayer?: unknown[][];
+    dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
   }
 }
@@ -128,8 +128,10 @@ export function AnalyticsConsent({ measurementId }: AnalyticsConsentProps) {
     }
 
     window.dataLayer = window.dataLayer ?? [];
-    window.gtag = (...args: unknown[]) => {
-      window.dataLayer?.push(args);
+    window.gtag = function gtag() {
+      // Google gtag commands use the function's IArguments object.
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer?.push(arguments);
     };
     window.gtag("js", new Date());
     window.gtag("config", measurementId, { send_page_view: false });
